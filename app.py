@@ -31,6 +31,18 @@ def login():
         access_token = create_access_token(identity={"username": username, "roles": user['roles']})
         return jsonify(access_token=access_token)
     return jsonify({"msg": "Bad username or password"}), 401
+
+
+@app.route('/getPQR/<pqr_id>', methods=['GET'])
+def get_pqr(pqr_id):
+    user = get_jwt_identity()
+    username = user.get('username')
+    for pqr in pqrs:
+        if pqr['id'] == pqr_id:
+            response = jsonify({"msg": pqr["msg"], "pqr_id": pqr["id"]})
+            return response
+    response = jsonify({"msg": "PQR not found"}), 404
+    return response
     
 
 
