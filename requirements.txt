@@ -1,0 +1,8 @@
+Flask
+marshmallow
+marshmallow-sqlalchemy
+Flask-RESTful
+Flask-Cors
+requests
+Flask-JWT-Extended
+logstash-formatter
