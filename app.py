@@ -7,7 +7,7 @@ from functools import wraps
 # Set up logging
 logger = logging.getLogger('logstash')
 logger.setLevel(logging.INFO)
-logstash_handler = logging.StreamHandler()
+logstash_handler = logging.FileHandler('logstash.log')
 logstash_handler.setFormatter(LogstashFormatterV1())
 logger.addHandler(logstash_handler)
 
