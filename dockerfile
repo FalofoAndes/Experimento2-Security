@@ -1,5 +1,5 @@
 # Usa la imagen oficial de Python como base
-FROM python:3.11-slim
+FROM python:3.11
 
 # Establece la variable de entorno para evitar que Python escriba archivos .pyc
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -18,10 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia el resto del código de tu proyecto a la imagen
 COPY . /app/
 
-# Realiza las migraciones y carga los datos
-RUN flask run
 # Exponer el puerto en el que se ejecutará tu aplicación
 EXPOSE 8000
 
-# Comando para ejecutar tu aplicación Django
-CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Comando para ejecutar tu aplicación 
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:8000"]
