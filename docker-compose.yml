@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - staticfiles:/app/staticfiles  # Monta el volumen para los archivos estáticos
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - staticfiles:/app/staticfiles  # Asegúrate de que Nginx tenga acceso a los archivos estáticos
+    depends_on:
+      - web
+
+volumes:
+  staticfiles:  # Define un volumen para los archivos estáticos
